@@ -9,21 +9,21 @@ pipeline {
         }
         stage("Build & Test"){
             steps{
-                sh "docker build . -t node-app-test-new"
+                bat "docker build . -t node-app-test-new"
             }
         }
         stage("Push to DockerHub"){
             steps{
                 withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                    sh "docker tag node-app-test-new ${env.dockerHubUser}/node-app-test-new:latest"
-                    sh "docker push ${env.dockerHubUser}/node-app-test-new:latest" 
+                    bat "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
+                    bat "docker tag node-app-test-new ${env.dockerHubUser}/node-app-test-new:latest"
+                    bat "docker push ${env.dockerHubUser}/node-app-test-new:latest" 
                 }
             }
         }
         stage("Deploy"){
             steps{
-                sh "docker-compose down && docker-compose up -d"
+                bat "docker-compose down && docker-compose up -d"
             }
         }
     }
