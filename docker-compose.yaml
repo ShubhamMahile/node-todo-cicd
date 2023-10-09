@@ -2,6 +2,6 @@ version: '3.9'
 
 services:
   web:
-    image: "trainwithshubham/node-app-test-new:latest"
+    image: "shubhammahile/todo-node-app:latest"
     ports:
       - "8002:8000"
