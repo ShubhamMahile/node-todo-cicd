@@ -2,6 +2,6 @@ version: '3.9'
 
 services:
   web:
-    image: "shubhammahile/todo-node-app:latest"
+    image: "shubhammahile/todo-node-app"
     ports:
       - "8002:8000"
