@@ -9,15 +9,15 @@ pipeline {
         }
         stage("Build & Test"){
             steps{
-                bat "docker build . -t node-app-test-new"
+                bat "docker build . -t todo-node-app"
             }
         }
         stage("Push to DockerHub"){
             steps{
                 withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
                     bat "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                    bat "docker tag node-app-test-new ${env.dockerHubUser}/node-app-test-new:latest"
-                    bat "docker push ${env.dockerHubUser}/node-app-test-new:latest" 
+                    bat "docker tag node-app-test-new ${env.dockerHubUser}/todo-node-app"
+                    bat "docker push ${env.dockerHubUser}/todo-node-app" 
                 }
             }
         }
